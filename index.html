@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Estructuras de Datos en Python</title>
+  <title>Estructuras de Datos en Python - Taller 2</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,155 +12,590 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #fafafa;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 30px;
+      margin: 20px 0;
     }
     header {
       text-align: center;
       margin-bottom: 30px;
       padding-bottom: 20px;
-      border-bottom: 2px solid #4a90e2;
+      border-bottom: 3px solid #8b5cf6;
     }
     h1 {
-      color: #2c3e50;
+      color: #6d28d9;
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
     h2 {
-      color: #3498db;
+      color: #7c3aed;
       margin-top: 30px;
+      font-size: 1.8em;
+    }
+    h3 {
+      color: #8b5cf6;
+      margin-top: 20px;
     }
     pre {
-      background-color: #f4f4f4;
+      background-color: #f3f4f6;
       padding: 15px;
-      border-radius: 6px;
+      border-radius: 8px;
       overflow-x: auto;
       font-size: 14px;
+      border-left: 4px solid #8b5cf6;
     }
     code {
-      background-color: #eee;
+      background-color: #ede9fe;
       padding: 2px 6px;
       border-radius: 4px;
       font-family: Consolas, Monaco, monospace;
+      color: #6d28d9;
     }
     .card {
-      background: white;
-      padding: 20px;
+      background: linear-gradient(135deg, #f8faff 0%, #f3f4f6 100%);
+      padding: 25px;
       margin-bottom: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+      border: 1px solid #e9d5ff;
     }
     .btn {
       display: inline-block;
-      background: #3498db;
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 8px;
       font-weight: bold;
-      margin-top: 10px;
+      margin: 5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
     }
     .btn:hover {
-      background: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+    }
+    .btn-secondary {
+      background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+    }
+    .demo-btn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      font-size: 14px;
+      padding: 8px 16px;
+      margin: 10px 5px 0 0;
+    }
+    .demo-btn:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
     }
     footer {
       text-align: center;
       margin-top: 40px;
       padding-top: 20px;
-      border-top: 1px solid #ddd;
-      color: #777;
+      border-top: 2px solid #e9d5ff;
+      color: #6b7280;
     }
     .warning {
-      background-color: #fff3cd;
+      background-color: #fef3c7;
       padding: 12px;
-      border-left: 4px solid #ffc107;
+      border-left: 4px solid #f59e0b;
       margin: 15px 0;
       border-radius: 4px;
+    }
+    .demo-output {
+      background-color: #1f2937;
+      color: #10b981;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-family: 'Courier New', monospace;
+      border: 1px solid #374151;
+      display: none;
+    }
+    .demo-output.show {
+      display: block;
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .structure-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #f3f4f6 0%, #e9d5ff 100%);
+      border-radius: 12px;
+    }
+    .nav-btn {
+      background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+      color: #4c1d95;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .nav-btn:hover, .nav-btn.active {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      color: white;
+      transform: translateY(-2px);
+    }
+    .structure-section {
+      display: none;
+    }
+    .structure-section.active {
+      display: block;
+      animation: slideIn 0.5s ease-out;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .code-block {
+      position: relative;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .copy-btn:hover {
+      background: #7c3aed;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>📚 Estructuras de Datos en Python</h1>
-    <p>Conjuntos • Diccionarios • Pilas • Colas</p>
-    <p>
-      <a class="btn" href="https://pythoncd.netlify.app/" target="_blank">Ver Presentación</a>
-      <a class="btn" href="https://github.com/feibertciin/SeguimientoPython" target="_blank">Ver Repositorio</a>
-    </p>
-  </header>
+  <div class="container">
+    <header>
+      <h1>🔮 Estructuras de Datos en Python</h1>
+      <p style="color: #6b7280; font-size: 1.2em;">Explora Interactivamente 6 Estructuras Fundamentales</p>
+      <p>
+        <a class="btn" href="https://listascomprendidas.netlify.app/" target="_blank">Aprender sobre Comprension de Listas</a>
+        <a class="btn btn-secondary" href="https://github.com/VoctorX/Taller2" target="_blank">Ver Repositorio</a>
+      </p>
+      <h3>Victor Cordoba</h3>
+    </header>
 
-  <div class="card">
-    <h2>1. Conjuntos (<code>set</code>)</h2>
-    <p>Los conjuntos en Python almacenan elementos <strong>únicos</strong> y descartan duplicados automáticamente.</p>
-    <pre>
-# Ejemplo:
-frutas = {'manzana', 'naranja', 'manzana', 'pera'}
-print(frutas)  # → {'manzana', 'naranja', 'pera', 'plátano'}</pre>
-    <p>Operaciones comunes:</p>
-    <ul>
-      <li>Verificar pertenencia: <code>'naranja' in frutas</code> → <code>True</code></li>
-      <li>Crear desde una cadena: <code>set('abracadabra')</code> → <code>{'a', 'b', 'r', 'c', 'd'}</code></li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>2. Diccionarios (<code>dict</code>)</h2>
-    <p>Los diccionarios permiten almacenar datos estructurados mediante pares <strong>clave-valor</strong>.</p>
-    <pre>
-estudiante = [
-  {'nombre': 'Ana', 'edad': 20, 'carrera': 'Ingeniería', 'notas': [85, 90, 78]},
-  {'nombre': 'Mateo', 'edad': 18, 'notas': [4, 5, 4]}
-]</pre>
-    <p>Operaciones comunes:</p>
-    <ul>
-      <li>Modificar: <code>estudiante[2]['edad'] = 19</code></li>
-      <li>Eliminar clave: <code>del estudiante[0]['carrera']</code></li>
-    </ul>
-    <div class="warning">
-      ⚠️ <strong>Nota importante:</strong> Verificar claves con <code>'nombre' in estudiante</code> no funciona como se espera, porque <code>estudiante</code> es una <em>lista de diccionarios</em>. Debes acceder a un elemento específico: <code>'nombre' in estudiante[0]</code>.
+    <div class="structure-nav">
+      <button class="nav-btn active" onclick="showSection('conjuntos')">🍎 Conjuntos</button>
+      <button class="nav-btn" onclick="showSection('diccionarios')">📚 Diccionarios</button>
+      <button class="nav-btn" onclick="showSection('pilas')">📚 Pilas</button>
+      <button class="nav-btn" onclick="showSection('colas')">🍽️ Colas</button>
+      <button class="nav-btn" onclick="showSection('comprehension')">⚡ Comprension de Listas</button>
+      <button class="nav-btn" onclick="showSection('anidadas')">🔗 Listas Anidadas</button>
     </div>
-  </div>
 
-  <div class="card">
-    <h2>3. Pilas (<code>Stack</code>)</h2>
-    <p>Implementación manual de una pila usando una lista, siguiendo el principio <strong>LIFO</strong> (Last In, First Out).</p>
-    <pre>
+    <!-- Sección 1: Conjuntos -->
+    <div id="conjuntos" class="structure-section active">
+      <div class="card">
+        <h2>1. Conjuntos (<code>set</code>)</h2>
+        <p>Los conjuntos en Python almacenan elementos <strong>únicos</strong> y descartan duplicados automáticamente.</p>
+        
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre>
+# Crear un conjunto con frutas (duplicados se eliminan automáticamente)
+frutas = {'manzana', 'naranja', 'manzana', 'pera', 'naranja', 'plátano'}
+print(frutas)  # {'naranja', 'plátano', 'pera', 'manzana'}</pre>
+        </div>
+        
+        <p>Operaciones comunes:</p>
+        <ul>
+          <li>Verificar pertenencia: <code>'naranja' in frutas</code> → <code>True</code></li>
+          <li>Crear desde una cadena: <code>set('abracadabra')</code> → <code>{'a', 'b', 'r', 'c', 'd'}</code></li>
+        </ul>
+        
+        <button class="demo-btn" onclick="demoConjuntos()">🎮 Ejecutar Demo</button>
+        <div id="demo-conjuntos" class="demo-output"></div>
+      </div>
+    </div>
+
+    <!-- Sección 2: Diccionarios -->
+    <div id="diccionarios" class="structure-section">
+      <div class="card">
+        <h2>2. Diccionarios (<code>dict</code>)</h2>
+        <p>Los diccionarios permiten almacenar datos estructurados mediante pares <strong>clave-valor</strong>.</p>
+        
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre>
+# Diccionario de ejemplo con múltiples estudiantes
+estudiante = [
+    {'nombre': 'Ana', 'edad': 15, 'carrera': 'Ingeniería', 'notas': [5, 3, 4]},
+    {'nombre': 'Victor', 'edad': 18, 'carrera': 'Ingeniería', 'notas': [5, 4, 5]},
+    {'nombre': 'Sara', 'edad': 19, 'carrera': 'Psicologia', 'notas': [3, 4, 5]}
+]</pre>
+        </div>
+        
+        <p>Operaciones comunes:</p>
+        <ul>
+          <li>Modificar: <code>estudiante[0]['edad'] = 21</code></li>
+          <li>Eliminar clave: <code>del estudiante[0]['carrera']</code></li>
+        </ul>
+        
+        <div class="warning">
+          ⚠️ <strong>Nota importante:</strong> Verificar claves con <code>'nombre' in estudiante</code> no funciona como se espera, porque <code>estudiante</code> es una <em>lista de diccionarios</em>. Debes acceder a un elemento específico: <code>'nombre' in estudiante[0]</code>.
+        </div>
+        
+        <button class="demo-btn" onclick="demoDiccionarios()">🎮 Ejecutar Demo</button>
+        <div id="demo-diccionarios" class="demo-output"></div>
+      </div>
+    </div>
+
+    <!-- Sección 3: Pilas -->
+    <div id="pilas" class="structure-section">
+      <div class="card">
+        <h2>3. Listas como Pilas (<code>Stack</code>)</h2>
+        <p>Implementación completa de una pila usando una lista, siguiendo el principio <strong>LIFO</strong> (Last In, First Out).</p>
+        
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre>
 class Pila:
     def __init__(self):
         self.items = []
-    def apilar(self, x): self.items.append(x)
-    def desapilar(self): return self.items.pop()
-    def ver_tope(self): return self.items[-1] if self.items else None
-    def esta_vacia(self): return len(self.items) == 0</pre>
-    <p><strong>Ejemplo práctico:</strong> Invertir la palabra "DATA" → "ATAD".</p>
-  </div>
+    
+    def apilar(self, elemento):
+        self.items.append(elemento)
+    
+    def desapilar(self):
+        if self.esta_vacia():
+            return None
+        return self.items.pop()
+    
+    def ver_tope(self):
+        if self.esta_vacia():
+            return None
+        return self.items[-1]
+    
+    def esta_vacia(self):
+        return not self.items</pre>
+        </div>
+        
+        <p><strong>Ejemplo práctico:</strong> Invertir la palabra "DATA" → "ATAD".</p>
+        
+        <button class="demo-btn" onclick="demoPilas()">🎮 Ejecutar Demo</button>
+        <div id="demo-pilas" class="demo-output"></div>
+      </div>
+    </div>
 
-  <div class="card">
-    <h2>4. Colas (<code>Queue</code>)</h2>
-    <p>Uso de <code>collections.deque</code> para implementar una cola eficiente con principio <strong>FIFO</strong> (First In, First Out).</p>
-    <pre>
+    <!-- Sección 4: Colas -->
+    <div id="colas" class="structure-section">
+      <div class="card">
+        <h2>4. Listas como Colas (<code>Queue</code>)</h2>
+        <p>Uso de <code>collections.deque</code> para implementar una cola eficiente con principio <strong>FIFO</strong> (First In, First Out).</p>
+        
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre>
 from collections import deque
-cola = deque()
-cola.append("Pedido 1")   # → entra al final
-cola.popleft()            # → sale del frente</pre>
-    <p><strong>Ejemplo real:</strong> Sistema de pedidos de un restaurante donde los pedidos se procesan en orden de llegada.</p>
+import time
+
+class SistemaPedidos:
+    def __init__(self):
+        self.pendientes = deque()  # Cola de pedidos pendientes
+        self.completados = []     # Lista de pedidos completados
+        self.numero_pedido = 1
+    
+    def agregar_pedido(self, cliente, items):
+        pedido = {
+            'numero': self.numero_pedido,
+            'cliente': cliente,
+            'items': items,
+            'hora': time.strftime("%H:%M:%S"),
+            'estado': 'pendiente'
+        }
+        self.pendientes.append(pedido)
+        self.numero_pedido += 1
+        return pedido['numero']</pre>
+        </div>
+        
+        <p><strong>Ejemplo real:</strong> Sistema de gestión de pedidos de restaurante donde los pedidos se procesan en orden de llegada.</p>
+        
+        <button class="demo-btn" onclick="demoColas()">🎮 Ejecutar Demo</button>
+        <div id="demo-colas" class="demo-output"></div>
+      </div>
+    </div>
+
+    <!-- Sección 5: List Comprehension -->
+    <div id="comprehension" class="structure-section">
+      <div class="card">
+        <h2>5. Comprensión de Listas</h2>
+        <p>Creación concisa de listas usando sintaxis compacta para filtrado y transformación.</p>
+        
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre>
+# Filtrar y transformar temperaturas
+celsius = [25, 30, 15, 35, 10, 20]
+
+# Solo temperaturas mayores a 20°C, convertidas a Fahrenheit
+fahrenheit = [(c * 9/5) + 32 for c in celsius if c > 20]
+print(fahrenheit)  # [77.0, 86.0, 95.0]</pre>
+        </div>
+        
+        <p>Operaciones comunes:</p>
+        <ul>
+          <li>Filtrado: <code>[x for x in lista if condicion]</code></li>
+          <li>Transformación: <code>[expresion for x in lista]</code></li>
+          <li>Combinado: <code>[expresion for x in lista if condicion]</code></li>
+        </ul>
+        
+        <button class="demo-btn" onclick="demoComprehension()">🎮 Ejecutar Demo</button>
+        <div id="demo-comprehension" class="demo-output"></div>
+      </div>
+    </div>
+
+    <!-- Sección 6: Listas Anidadas -->
+    <div id="anidadas" class="structure-section">
+      <div class="card">
+        <h2>6. Listas Anidadas</h2>
+        <p>Manejo de matrices y estructuras multidimensionales usando list comprehension.</p>
+        
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+          <pre>
+# Matriz original
+matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+]
+
+# Transposición usando listas por comprensión
+transposed = [[row[i] for row in matrix] for i in range(4)]
+
+# Transposición usando la función zip
+transposed_zip = list(zip(*matrix))</pre>
+        </div>
+        
+        <p><strong>Aplicación:</strong> Transposición de matrices para operaciones matemáticas y manipulación de datos tabulares.</p>
+        
+        <button class="demo-btn" onclick="demoAnidadas()">🎮 Ejecutar Demo</button>
+        <div id="demo-anidadas" class="demo-output"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📥 Cómo usar este código</h2>
+      <p>Clona el repositorio para explorar y ejecutar los ejemplos:</p>
+      <pre>git clone https://github.com/VoctorX/Taller2.git</pre>
+      <p>Luego navega al directorio y ejecuta los archivos con Python:</p>
+      <pre>cd Taller2
+jupyter notebook CuadernoEstructurasDatos.ipynb</pre>
+      <p>No se requieren librerías externas (solo módulos estándar como <code>collections</code>).</p>
+    </div>
+
+    <footer>
+      <p>Actividad educativa • Lenguajes de Programación • Seguimiento 2 • © 2025</p>
+      <p>
+        <a href="https://listascomprendidas.netlify.app/" target="_blank">Pagina Principal</a> |
+        <a href="https://github.com/VoctorX/Taller2" target="_blank">Repositorio en GitHub</a>
+      </p>
+      <p><strong>Creado por:</strong> Victor Cordoba (VoctorX)</p>
+    </footer>
   </div>
 
-  <div class="card">
-    <h2>📥 Cómo usar este código</h2>
-    <p>Clona el repositorio para explorar y ejecutar los ejemplos:</p>
-    <pre>git clone https://github.com/feibertciin/SeguimientoPython.git</pre>
-    <p>Luego navega al directorio y ejecuta los archivos con Python:</p>
-    <pre>cd SeguimientoPython
-python tu_archivo.py</pre>
-    <p>No se requieren librerías externas (solo módulos estándar como <code>collections</code>).</p>
-  </div>
+  <script>
+    function showSection(sectionId) {
+      // Ocultar todas las secciones
+      const sections = document.querySelectorAll('.structure-section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Mostrar la sección seleccionada
+      document.getElementById(sectionId).classList.add('active');
+      
+      // Actualizar botones de navegación
+      const buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
 
-  <footer>
-    <p>Actividad educativa • Curso de Python • © 2025</p>
-    <p>
-      <a href="https://dainty-praline-cf5ea5.netlify.app/" target="_blank">Presentación</a> |
-      <a href="https://github.com/feibertciin/SeguimientoPython" target="_blank">Repositorio en GitHub</a>
-    </p>
-  </footer>
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling;
+      const textArea = document.createElement('textarea');
+      textArea.value = codeBlock.textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      button.textContent = '¡Copiado!';
+      setTimeout(() => {
+        button.textContent = 'Copiar';
+      }, 2000);
+    }
+
+    function demoConjuntos() {
+      const output = document.getElementById('demo-conjuntos');
+      output.innerHTML = `
+🍎 <strong>Demo de Conjuntos:</strong><br>
+<br>
+📝 Creando conjunto con frutas:<br>
+   Input: {'manzana', 'naranja', 'manzana', 'pera', 'naranja', 'plátano'}<br>
+   Output: {'pera', 'plátano', 'manzana', 'naranja'}<br>
+   ¡Los duplicados fueron eliminados automáticamente!<br>
+<br>
+🔍 Verificando pertenencia:<br>
+   'naranja' in frutas → True<br>
+   'uva' in frutas → False<br>
+<br>
+✨ Creando desde cadena:<br>
+   set('abracadabra') → {'a', 'b', 'r', 'c', 'd'}<br>
+   ¡Solo letras únicas!`;
+      output.classList.add('show');
+    }
+
+    function demoDiccionarios() {
+      const output = document.getElementById('demo-diccionarios');
+      output.innerHTML = `
+📚 <strong>Demo de Diccionarios:</strong><br>
+<br>
+👥 Lista de estudiantes original:<br>
+   [<br>
+   &nbsp;&nbsp;{'nombre': 'Ana', 'edad': 15, 'carrera': 'Ingeniería', 'notas': [5, 3, 4]},<br>
+   &nbsp;&nbsp;{'nombre': 'Victor', 'edad': 18, 'carrera': 'Ingeniería', 'notas': [5, 4, 5]},<br>
+   &nbsp;&nbsp;{'nombre': 'Sara', 'edad': 19, 'carrera': 'Psicologia', 'notas': [3, 4, 5]}<br>
+   ]<br>
+<br>
+✏️ Modificando edad de Ana:<br>
+   estudiante[0]['edad'] = 21<br>
+   → La edad de Ana ahora es 21<br>
+<br>
+🗑️ Eliminando carrera de Ana:<br>
+   del estudiante[0]['carrera']<br>
+   → La clave 'carrera' fue eliminada<br>
+<br>
+✅ Verificando existencia:<br>
+   'nombre' in estudiante[0] → True<br>
+   'carrera' in estudiante[0] → False`;
+      output.classList.add('show');
+    }
+
+    function demoPilas() {
+      const output = document.getElementById('demo-pilas');
+      output.innerHTML = `
+📚 <strong>Demo de Pilas (LIFO):</strong><br>
+<br>
+🔄 Invertir la palabra "DATA":<br>
+<br>
+📥 Apilando letras:<br>
+   Apilar 'D' → Pila: ['D']<br>
+   Apilar 'A' → Pila: ['D', 'A']<br>
+   Apilar 'T' → Pila: ['D', 'A', 'T']<br>
+   Apilar 'A' → Pila: ['D', 'A', 'T', 'A']<br>
+<br>
+📤 Desapilando letras (LIFO):<br>
+   Desapilar → 'A'<br>
+   Desapilar → 'T'<br>
+   Desapilar → 'A'<br>
+   Desapilar → 'D'<br>
+<br>
+✨ Resultado final: "ATAD"<br>
+   ¡La palabra fue invertida correctamente!`;
+      output.classList.add('show');
+    }
+
+    function demoColas() {
+      const output = document.getElementById('demo-colas');
+      output.innerHTML = `
+🍽️ <strong>Demo de Colas (FIFO) - Sistema de Pedidos:</strong><br>
+<br>
+📝 Agregando pedidos a la cola:<br>
+   Pedido #1: Ana - ['Hamburguesa', 'Papas']<br>
+   Pedido #2: Carlos - ['Pizza', 'Ensalada']<br>
+   Pedido #3: María - ['Sushi', 'Sopa']<br>
+   Pedido #4: Juan - ['Tacos', 'Horchata']<br>
+<br>
+📋 Estado de la cola:<br>
+   [Pedido#1, Pedido#2, Pedido#3, Pedido#4]<br>
+<br>
+🍳 Procesando pedidos (FIFO):<br>
+   ✅ Procesando Pedido#1 (Ana)<br>
+   ✅ Procesando Pedido#2 (Carlos)<br>
+<br>
+📊 Estado actual:<br>
+   Pendientes: [Pedido#3, Pedido#4]<br>
+   Completados: [Pedido#1, Pedido#2]<br>
+<br>
+⚡ ¡Los pedidos se procesan en orden de llegada!`;
+      output.classList.add('show');
+    }
+
+    function demoComprehension() {
+      const output = document.getElementById('demo-comprehension');
+      output.innerHTML = `
+⚡ <strong>Demo de List Comprehension:</strong><br>
+<br>
+🌡️ Lista original de temperaturas Celsius:<br>
+   [25, 30, 15, 35, 10, 20]<br>
+<br>
+🎯 Condición: Solo temperaturas > 20°C<br>
+   Filtrando: [25, 30, 35] (se eliminaron 15, 10, 20)<br>
+<br>
+🔄 Transformación a Fahrenheit:<br>
+   Fórmula: (C × 9/5) + 32<br>
+   25°C → 77.0°F<br>
+   30°C → 86.0°F<br>
+   35°C → 95.0°F<br>
+<br>
+✨ Resultado final:<br>
+   [77.0, 86.0, 95.0]<br>
+<br>
+💡 Todo en una línea:<br>
+   [(c * 9/5) + 32 for c in celsius if c > 20]`;
+      output.classList.add('show');
+    }
+
+    function demoAnidadas() {
+      const output = document.getElementById('demo-anidadas');
+      output.innerHTML = `
+🔗 <strong>Demo de Listas Anidadas - Transposición de Matriz:</strong><br>
+<br>
+📊 Matriz original (3×4):<br>
+   [1,  2,  3,  4]<br>
+   [5,  6,  7,  8]<br>
+   [9, 10, 11, 12]<br>
+<br>
+🔄 Transposición (4×3) usando List Comprehension:<br>
+   [[row[i] for row in matrix] for i in range(4)]<br>
+<br>
+✨ Resultado:<br>
+   [1, 5,  9]<br>
+   [2, 6, 10]<br>
+   [3, 7, 11]<br>
+   [4, 8, 12]<br>
+<br>
+🔄 Método alternativo con zip():<br>
+   list(zip(*matrix))<br>
+   [(1, 5, 9), (2, 6, 10), (3, 7, 11), (4, 8, 12)]<br>
+<br>
+💡 Las filas se convirtieron en columnas y viceversa!`;
+      output.classList.add('show');
+    }
+  </script>
 
 </body>
 </html>
