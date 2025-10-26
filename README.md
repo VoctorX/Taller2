@@ -94,7 +94,7 @@ Taller2/
 ├── README.md
 ├── compañerosListas.ipynb     # Cuaderno de Jupyter con todos los ejemplos
 ├── index.html                 # Página web interactiva con demostraciones sobre TODAS las listas
-└── Presentacion.pdf #Pagina web Interactiva donde aprenderas sobre Listas Comprendidas
+└── Compresión de Listas en Python - Victor y Gabriel.pdf # Presentacion sobre la comprension de Listas, por Victor y Grabiel
 ```
 
 ### 🚀 Cómo ejecutar el proyecto
