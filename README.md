@@ -59,9 +59,17 @@ Este proyecto muestra ejemplos prácticos del uso de **estructuras de datos fund
 
 ## 📽️ Presentación Interactiva Sobre Listas Comprendidas (Mi tema)
 
-Las Listas comprendidas se explican en detalle en la siguiente página interactiva con demostraciones en vivo:
+Las listas comprendidas se explican en detalle en la siguiente página interactiva con demostraciones en vivo:
 
 👉 **[Aprender sobre Listas Comprendidas en la página interactiva en Netlify](https://listascomprendidas.netlify.app/)**
+
+---
+
+## ⚜️ Presentación Interactiva sobre todas las listas
+
+Aprende mas sobre las listas vistas en clase en la siguiente página interactiva con demostraciones en vivo:
+
+➡️ **[Aprender de forma divertida mas sobre las todas las listas vistas en clase](https://voctorx.github.io/Taller2/)**
 
 ---
 
